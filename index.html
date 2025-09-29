@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioskop Digital - Beli Tiket Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bioskop Digital</h1>
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Cari film...">
+                <select id="genreFilter">
+                    <option value="all">Semua Genre</option>
+                    <option value="action">Action</option>
+                    <option value="drama">Drama</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="horror">Horror</option>
+                </select>
+                <button id="manageFilms">Kelola Film</button>
+                <button id="addFilm" class="hidden">Tambah Film</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Daftar Film -->
+        <section id="movies" class="movies-section">
+            <div class="container">
+                <h2>Pilih Film</h2>
+                <div id="moviesGrid" class="movies-grid">
+                    <!-- Cards akan di-generate via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Jadwal -->
+        <section id="schedule" class="schedule-section hidden">
+            <div class="container">
+                <h2 id="selectedMovieTitle">Pilih Jadwal</h2>
+                <div id="scheduleButtons" class="schedule-buttons">
+                    <!-- Buttons jadwal akan di-generate via JS -->
+                </div>
+                <button id="backToMovies" class="back-btn">Kembali ke Film</button>
+            </div>
+        </section>
+
+        <!-- Section Kursi -->
+        <section id="seats" class="seats-section hidden">
+            <div class="container">
+                <h2>Pilih Kursi</h2>
+                <p id="selectedTime"></p>
+                <div id="seatsGrid" class="seats-grid">
+                    <!-- Seats akan di-generate via JS -->
+                </div>
+                <div class="seats-info">
+                    <span class="available">Tersedia</span>
+                    <span class="selected">Dipilih</span>
+                    <span class="booked">Dibooking</span>
+                </div>
+                <p id="selectedSeatsInfo">Kursi dipilih: 0 | Total: Rp 0</p>
+                <button id="proceedToForm" class="proceed-btn" disabled>Ke Form Pembelian</button>
+                <button id="backToSchedule" class="back-btn">Kembali ke Jadwal</button>
+            </div>
+        </section>
+
+        <!-- Section Form Pembelian -->
+        <section id="form" class="form-section hidden">
+            <div class="container">
+                <h2>Detail Pembelian</h2>
+                <form id="bookingForm">
+                    <input type="text" id="customerName" placeholder="Nama Lengkap" required>
+                    <input type="email" id="customerEmail" placeholder="Email" required>
+                    <p id="bookingSummary">
+                        Film: <span id="summaryMovie"></span><br>
+                        Jadwal: <span id="summaryTime"></span><br>
+                        Kursi: <span id="summarySeats"></span><br>
+                        Total: <span id="summaryTotal">Rp 0</span>
+                    </p>
+                    <button type="submit" id="submitBooking">Konfirmasi Booking</button>
+                </form>
+                <button id="backToSeats" class="back-btn">Kembali ke Kursi</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal untuk Tambah/Edit Film -->
+    <div id="filmModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Tambah Film</h2>
+            <form id="filmForm">
+                <input type="hidden" id="filmId">
+                <input type="text" id="filmName" placeholder="Nama Film" required>
+                <select id="filmGenre">
+                    <option value="action">Action</option>
+                    <option value="drama">Drama</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="horror">Horror</option>
+                </select>
+                <input type="text" id="filmDuration" placeholder="Durasi (misal 135 menit)" required>
+                <input type="text" id="filmSchedules" placeholder="Jadwal (comma-separated, misal 13:00,17:00,21:00)" required>
+                <input type="url" id="filmPoster" placeholder="URL Poster" required>
+                <button type="submit">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bioskop Digital. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

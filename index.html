@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioskop - Beli Tiket Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bioskop</h1>
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Cari film...">
+                <select id="genreFilter">
+                    <option value="all">Semua Genre</option>
+                    <option value="action">Action</option>
+                    <option value="drama">Drama</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="horror">Horror</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h2>Selamat Datang di Website Beli Tiket Online</h2>
+                <p>Pesan tiket film favorit Anda dengan mudah dan cepat melalui website kami.</p>
+                <a href="pilih-film.html" class="btn btn-primary">Pilih Film</a>
+            </div>
+        </section>
+        <!-- Section Daftar Film -->
+        <section id="movies" class="movies-section">
+            <div class="container">
+                <h2>Film Sedang Tayang</h2>
+                <div id="moviesGrid" class="movies-grid">
+                    <!-- Cards akan di-generate via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Jadwal -->
+        <section id="schedule" class="schedule-section hidden">
+            <div class="container">
+                <h2 id="selectedMovieTitle">Pilih Jadwal</h2>
+                <div id="scheduleButtons" class="schedule-buttons">
+                    <!-- Buttons jadwal akan di-generate via JS -->
+                </div>
+                <button id="backToMovies" class="back-btn">Kembali ke Film</button>
+            </div>
+        </section>
+
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bioskop.All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

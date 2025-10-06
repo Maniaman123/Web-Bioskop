@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pilih Kursi - Bioskop</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Pilih Kursi dan Pembayaran</h1>
+            <p id="infoCinemaFilm"></p>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Jadwal</h2>
+            <div id="scheduleButtons"></div>
+
+            <h2>Pilih Kursi</h2>
+            <div id="seatsGrid" class="seats-grid"></div>
+            <p id="selectedSeatsInfo">Kursi dipilih: 0 | Total: Rp 0</p>
+
+            <h2>Form Pembayaran</h2>
+            <form id="paymentForm">
+                <input type="text" id="customerName" placeholder="Nama Lengkap" required />
+                <input type="email" id="customerEmail" placeholder="Email" required />
+                <label for="paymentMethod">Metode Pembayaran:</label><br>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="dana" name="paymentMethod" value="Dana" required>
+                        <label for="dana">Dana</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="gopay" name="paymentMethod" value="GoPay">
+                        <label for="gopay">GoPay</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="ovo" name="paymentMethod" value="OVO">
+                        <label for="ovo">OVO</label>
+                    </div>
+                </div>
+                <button type="submit" id="confirmPayment" disabled>Konfirmasi Pembayaran</button>
+            </form>
+            <button id="backToMovies" onclick="window.history.back()">Kembali</button>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bioskop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cinemas = [
+            { id: 0, name: 'Bioskop Grand Mall', location: 'Jakarta Pusat' },
+            { id: 1, name: 'Cinema XXI Plaza', location: 'Jakarta Selatan' },
+            { id: 2, name: 'CGV Mall', location: 'Jakarta Barat' }
+        ];
+
+        const films = [
+            { id: 0, name: 'Avengers: Endgame', genre: 'action', poster: 'Avanger.png', duration: '180 menit', schedules: ['10:00', '14:00', '18:00'], cinemas: [0,1] },
+            { id: 1, name: 'Titanic', genre: 'drama', poster: 'Titanic.png', duration: '195 menit', schedules: ['12:00', '16:00', '20:00'], cinemas: [1,2] },
+            { id: 2, name: 'Deadpool', genre: 'comedy', poster: 'Deadpool.png', duration: '108 menit', schedules: ['11:00', '15:00', '19:00'], cinemas: [0,2] },
+            { id: 3, name: 'Waktu Maghrib', genre: 'horror', poster: 'Waktu.png', duration: '135 menit', schedules: ['13:00', '17:00', '21:00'], cinemas: [0,1,2] }
+        ];
+
+        const pricePerTicket = 50000;
+        const totalSeats = 25;
+        const rows = ['A', 'B', 'C', 'D', 'E'];
+        const cols = [1, 2, 3, 4, 5];
+
+        let selectedCinema = null;
+        let selectedFilm = null;
+        let selectedTime = null;
+        let selectedSeats = [];
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function showInfo() {
+            const info = document.getElementById('infoCinemaFilm');
+            info.textContent = `Bioskop: ${selectedCinema.name} | Film: ${selectedFilm.name}`;
+        }
+
+        function generateScheduleButtons() {
+            const container = document.getElementById('scheduleButtons');
+            container.innerHTML = '';
+            selectedFilm.schedules.forEach(time => {
+                const btn = document.createElement('button');
+                btn.textContent = time;
+                btn.type = 'button';
+                btn.addEventListener('click', () => {
+                    selectedTime = time;
+                    document.getElementById('selectedSeatsInfo').textContent = `Jadwal: ${time} | Kursi dipilih: 0 | Total: Rp 0`;
+                    selectedSeats = [];
+                    generateSeatsGrid();
+                    updateConfirmButton();
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        function generateSeatsGrid() {
+            const container = document.getElementById('seatsGrid');
+            container.innerHTML = '';
+            // Random booked seats 20%
+            const bookedSeats = new Set();
+            while (bookedSeats.size < Math.floor(totalSeats * 0.2)) {
+                bookedSeats.add(Math.floor(Math.random() * totalSeats));
+            }
+
+            for (let r = 0; r < rows.length; r++) {
+                for (let c = 0; c < cols.length; c++) {
+                    const seatIndex = r * cols.length + c;
+                    const seatLabel = rows[r] + cols[c];
+                    const seat = document.createElement('div');
+                    seat.classList.add('seat');
+                    if (bookedSeats.has(seatIndex)) {
+                        seat.classList.add('booked');
+                    } else {
+                        seat.classList.add('available');
+                        seat.addEventListener('click', () => toggleSeat(seat, seatLabel));
+                    }
+                    seat.textContent = seatLabel;
+                    container.appendChild(seat);
+                }
+            }
+            updateSelectedSeatsInfo();
+        }
+
+        function toggleSeat(seatElement, seatLabel) {
+            if (selectedSeats.includes(seatLabel)) {
+                selectedSeats = selectedSeats.filter(s => s !== seatLabel);
+                seatElement.classList.remove('selected');
+                seatElement.classList.add('available');
+            } else {
+                if (selectedSeats.length >= 5) {
+                    alert('Maksimal memilih 5 kursi');
+                    return;
+                }
+                selectedSeats.push(seatLabel);
+                seatElement.classList.remove('available');
+                seatElement.classList.add('selected');
+            }
+            updateSelectedSeatsInfo();
+            updateConfirmButton();
+        }
+
+        function updateSelectedSeatsInfo() {
+            const info = document.getElementById('selectedSeatsInfo');
+            const total = selectedSeats.length * pricePerTicket;
+            info.textContent = `Jadwal: ${selectedTime || '-'} | Kursi dipilih: ${selectedSeats.length} | Total: Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function updateConfirmButton() {
+            const btn = document.getElementById('confirmPayment');
+            btn.disabled = !(selectedTime && selectedSeats.length > 0);
+        }
+
+        function handlePayment(event) {
+            event.preventDefault();
+            const name = document.getElementById('customerName').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            if (!name || !email) {
+                alert('Mohon isi nama dan email dengan benar');
+                return;
+            }
+            if (!paymentMethod) {
+                alert('Pilih metode pembayaran');
+                return;
+            }
+            if (!selectedTime || selectedSeats.length === 0) {
+                alert('Pilih jadwal dan kursi terlebih dahulu');
+                return;
+            }
+            const total = selectedSeats.length * pricePerTicket;
+            alert(`Pembayaran berhasil!\nBioskop: ${selectedCinema.name}\nFilm: ${selectedFilm.name}\nJadwal: ${selectedTime}\nKursi: ${selectedSeats.join(', ')}\nNama: ${name}\nEmail: ${email}\nMetode Pembayaran: ${paymentMethod}\nTotal: Rp ${total.toLocaleString('id-ID')}`);
+            window.location.href = 'pilih-film.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cinemaId = parseInt(getQueryParam('cinemaId'));
+            const filmId = parseInt(getQueryParam('filmId'));
+            selectedCinema = cinemas.find(c => c.id === cinemaId);
+            selectedFilm = films.find(f => f.id === filmId);
+            if (!selectedCinema || !selectedFilm) {
+                alert('Data bioskop atau film tidak ditemukan');
+                window.location.href = 'pilih-film.html';
+                return;
+            }
+            showInfo();
+            generateScheduleButtons();
+
+            document.getElementById('paymentForm').addEventListener('submit', handlePayment);
+        });
+    </script>
+</body>
+</html>

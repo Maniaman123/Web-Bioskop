@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daftar Film - Bioskop</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bioskop - Daftar Film</h1>
+        </div>
+    </header>
+    <main>
+        <section id="movies" class="movies-section">
+            <div class="container">
+                <h2>Daftar Film</h2>
+        <div id="moviesGrid" class="movies-grid">
+            <!-- Daftar film statis sesuai bioskop -->
+            <div id="bioskop0" class="bioskop-section">
+                <h3>Bioskop Grand Mall</h3>
+                <div class="movie-card">
+                    <img src="Avanger.png" alt="Avengers: Endgame" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Avengers: Endgame</h4>
+                    <p>Genre: Action | Durasi: 180 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=0'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Deadpool.png" alt="Deadpool" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Deadpool</h4>
+                    <p>Genre: Comedy | Durasi: 108 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=1'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Waktu Maghrib</h4>
+                    <p>Genre: Horror | Durasi: 135 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=2'" class="select-movie">Pilih Film</button>
+                </div>
+            </div>
+            <div id="bioskop1" class="bioskop-section">
+                <h3>Cinema XXI Plaza</h3>
+                <div class="movie-card">
+                    <img src="Avanger.png" alt="Avengers: Endgame" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Avengers: Endgame</h4>
+                    <p>Genre: Action | Durasi: 180 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=0'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Titanic.png" alt="Titanic" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Titanic</h4>
+                    <p>Genre: Drama | Durasi: 195 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=1'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Waktu Maghrib</h4>
+                    <p>Genre: Horror | Durasi: 135 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=2'" class="select-movie">Pilih Film</button>
+                </div>
+            </div>
+            <div id="bioskop2" class="bioskop-section">
+                <h3>CGV Mall</h3>
+                <div class="movie-card">
+                    <img src="Titanic.png" alt="Titanic" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Titanic</h4>
+                    <p>Genre: Drama | Durasi: 195 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=0'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Deadpool.png" alt="Deadpool" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Deadpool</h4>
+                    <p>Genre: Comedy | Durasi: 108 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=1'" class="select-movie">Pilih Film</button>
+                </div>
+                <div class="movie-card">
+                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>Waktu Maghrib</h4>
+                    <p>Genre: Horror | Durasi: 135 menit</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=2'" class="select-movie">Pilih Film</button>
+                </div>
+            </div>
+        </div>
+        <button id="backToCinemas" class="back-btn">Kembali ke Pilih Bioskop</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bioskop. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('backToCinemas').addEventListener('click', function() {
+            window.location.href = 'pilih-film.html';
+        });
+    </script>
+</body>
+</html>

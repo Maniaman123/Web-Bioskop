@@ -15,74 +15,12 @@
     <main>
         <section id="movies" class="movies-section">
             <div class="container">
-                <h2>Daftar Film</h2>
-        <div id="moviesGrid" class="movies-grid">
-            <!-- Daftar film statis sesuai bioskop -->
-            <div id="bioskop0" class="bioskop-section">
-                <h3>Bioskop Grand Mall</h3>
-                <div class="movie-card">
-                    <img src="Avanger.png" alt="Avengers: Endgame" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Avengers: Endgame</h4>
-                    <p>Genre: Action | Durasi: 180 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=0'" class="select-movie">Pilih Film</button>
+                <h2 id="cinemaTitle">Daftar Film</h2>
+                <p id="cinemaLocation"></p>
+                <div id="moviesGrid" class="movies-grid">
+                    <!-- Film akan di-generate via JavaScript -->
                 </div>
-                <div class="movie-card">
-                    <img src="Deadpool.png" alt="Deadpool" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Deadpool</h4>
-                    <p>Genre: Comedy | Durasi: 108 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=1'" class="select-movie">Pilih Film</button>
-                </div>
-                <div class="movie-card">
-                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Waktu Maghrib</h4>
-                    <p>Genre: Horror | Durasi: 135 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=0&filmId=2'" class="select-movie">Pilih Film</button>
-                </div>
-            </div>
-            <div id="bioskop1" class="bioskop-section">
-                <h3>Cinema XXI Plaza</h3>
-                <div class="movie-card">
-                    <img src="Avanger.png" alt="Avengers: Endgame" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Avengers: Endgame</h4>
-                    <p>Genre: Action | Durasi: 180 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=0'" class="select-movie">Pilih Film</button>
-                </div>
-                <div class="movie-card">
-                    <img src="Titanic.png" alt="Titanic" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Titanic</h4>
-                    <p>Genre: Drama | Durasi: 195 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=1'" class="select-movie">Pilih Film</button>
-                </div>
-                <div class="movie-card">
-                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Waktu Maghrib</h4>
-                    <p>Genre: Horror | Durasi: 135 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=1&filmId=2'" class="select-movie">Pilih Film</button>
-                </div>
-            </div>
-            <div id="bioskop2" class="bioskop-section">
-                <h3>CGV Mall</h3>
-                <div class="movie-card">
-                    <img src="Titanic.png" alt="Titanic" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Titanic</h4>
-                    <p>Genre: Drama | Durasi: 195 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=0'" class="select-movie">Pilih Film</button>
-                </div>
-                <div class="movie-card">
-                    <img src="Deadpool.png" alt="Deadpool" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Deadpool</h4>
-                    <p>Genre: Comedy | Durasi: 108 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=1'" class="select-movie">Pilih Film</button>
-                </div>
-                <div class="movie-card">
-                    <img src="Waktu.png" alt="Waktu Maghrib" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
-                    <h4>Waktu Maghrib</h4>
-                    <p>Genre: Horror | Durasi: 135 menit</p>
-                    <button onclick="window.location.href='kursi.html?cinemaId=2&filmId=2'" class="select-movie">Pilih Film</button>
-                </div>
-            </div>
-        </div>
-        <button id="backToCinemas" class="back-btn">Kembali ke Pilih Bioskop</button>
+                <button id="backToCinemas" class="back-btn">Kembali ke Pilih Bioskop</button>
             </div>
         </section>
     </main>
@@ -91,6 +29,73 @@
             <p>&copy; 2025 Bioskop. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        const cinemas = [
+            { id: 0, name: 'Bioskop Grand Mall', location: 'Jakarta Pusat' },
+            { id: 1, name: 'Cinema XXI Plaza', location: 'Jakarta Selatan' },
+            { id: 2, name: 'CGV Mall', location: 'Jakarta Barat' }
+        ];
+
+        const films = [
+            { id: 0, name: 'Avengers: Endgame', genre: 'action', poster: 'Avanger.png', duration: '180 menit', cinemas: [0, 1] },
+            { id: 1, name: 'Titanic', genre: 'drama', poster: 'Titanic.png', duration: '195 menit', cinemas: [1, 2] },
+            { id: 2, name: 'Deadpool', genre: 'comedy', poster: 'Deadpool.png', duration: '108 menit', cinemas: [0, 2] },
+            { id: 3, name: 'Waktu Maghrib', genre: 'horror', poster: 'Waktu.png', duration: '135 menit', cinemas: [0, 1, 2] }
+        ];
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function generateFilms(cinemaId) {
+            const cinema = cinemas.find(c => c.id === cinemaId);
+            if (!cinema) {
+                alert('Bioskop tidak ditemukan');
+                window.location.href = 'pilih-film.html';
+                return;
+            }
+
+            document.getElementById('cinemaTitle').textContent = `Daftar Film - ${cinema.name}`;
+            document.getElementById('cinemaLocation').textContent = `Lokasi: ${cinema.location}`;
+
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = '';
+
+            const availableFilms = films.filter(film => film.cinemas.includes(cinemaId));
+
+            if (availableFilms.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; color:#ccc;">Tidak ada film yang tersedia di bioskop ini.</p>';
+                return;
+            }
+
+            availableFilms.forEach(film => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                    <img src="${film.poster}" alt="${film.name}" onerror="this.src='https://via.placeholder.com/200x300/FF0000/FFFFFF?text=No+Image'">
+                    <h4>${film.name}</h4>
+                    <p>Genre: ${film.genre.charAt(0).toUpperCase() + film.genre.slice(1)} | Durasi: ${film.duration}</p>
+                    <button onclick="window.location.href='kursi.html?cinemaId=${cinemaId}&filmId=${film.id}'" class="select-movie">Pilih Film</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cinemaId = parseInt(getQueryParam('cinemaId'));
+            if (isNaN(cinemaId) || cinemaId < 0 || cinemaId > 2) {
+                alert('Parameter bioskop tidak valid');
+                window.location.href = 'pilih-film.html';
+                return;
+            }
+            generateFilms(cinemaId);
+        });
+
+        document.getElementById('backToCinemas').addEventListener('click', function() {
+            window.location.href = 'pilih-film.html';
+        });
+    </script>
     <script>
         document.getElementById('backToCinemas').addEventListener('click', function() {
             window.location.href = 'pilih-film.html';
